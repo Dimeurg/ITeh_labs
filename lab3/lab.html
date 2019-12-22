@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+
+<script>
+	var count = 0;
+	var countBest = 0;
+	var countGood = 0;
+	var countBad = 0;
+	
+	function addNew(){
+		var name = $(".name").val();
+		if(name === "")
+			name = "stud" + count++;
+			
+		var val = "<tr><td>"+ name + "<\/td>";
+		for(i = 0; i < 5; ++i){
+			var g = $(".g" + i).val();
+			if(g == "" || isNaN(g) || g > 5 || g < 2)
+				val += "<td>" + (Math.floor(Math.random() * 4) + 2)  + "<\/td>";
+			else
+				val += "<td>" + g  + "<\/td>";
+		}
+		val += "<\/tr>";
+		$(".start").after(val);
+	}
+	
+	function countHelp(arr){
+		var hasFour = 0;
+		for(i = 1; i < 6; i++){
+			var value = arr.cells[i].innerHTML;
+			if(value <= 3)
+			{				
+				countBad++;
+				return
+			}
+			
+			if(value == 4)
+				hasFour = 1;
+		}
+		
+		if(hasFour){
+			countGood++;
+		}
+		else{
+			countBest++;
+		}
+	}
+	
+	function countM(value){
+		var table =  document.getElementById("t");
+		var rowCount = table.rows.length;
+		for(var i = 1, row; row = table.rows[i];i++){
+			countHelp(row);
+		}
+		
+		$("#best").val(countBest);
+		$("#good").val(countGood);
+		$("#bad").val(countBad);
+
+		
+		countBest = 0;
+		countGood = 0;
+		countBad = 0;
+
+	}
+	
+	
+</script>
+<head>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+	<title>lab3</title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+
+<input type="button" value="count" onClick="countM(value)"><br>
+best<input id = "best" type="text" value=""><br>
+good<input id = "good" type="text" value=""><br>
+bad<input id = "bad" type="text" value=""><br>
+
+<input type="button" value="add" onClick="addNew()">
+<br>name
+<input class = "name" type="text" value="">
+<br>
+1<input class = "g0" type="text" value="">
+2<input class = "g1" type="text" value="">
+3<input class = "g2" type="text" value="">
+4<input class = "g3" type="text" value="">
+5<input class = "g4" type="text" value="">
+
+<table id="t" width="50%" border="1">
+	<tr class= "start"><td colspan = "6">students</td></tr>
+</table>
+
+</body>
+</body>
+</html>

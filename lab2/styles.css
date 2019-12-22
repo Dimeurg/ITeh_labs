@@ -1,0 +1,19 @@
+
+table{
+	text-align: center;
+	border-spacing:0;
+	border: 2px solid #C70039;
+	border-bottom-width: 0px;
+}
+
+tr{
+	background: #C70039;
+}
+
+.field2:valid{	
+			background-color: blue
+		}
+		
+.field2:invalid{			
+			background-color: yellow
+		}

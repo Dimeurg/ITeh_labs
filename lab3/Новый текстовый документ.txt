@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+
+<script>
+	var count = 0;
+	var countBest = 0;
+	var countGood = 0;
+	var countBad = 0;
+	function addNew(){
+		var name = $(".name").val();
+		if(name === "")
+			name = "stud" + count++;
+			
+		var val = "<tr><td>"+ name + "<\/td>";
+		for(i = 0; i < 5; ++i){
+			var g = $(".g" + i).val();
+			if(g == "" || isNaN(g) || g > 5 || g < 2)
+				val += "<td>" + (Math.floor(Math.random() * 5) + 1)  + "<\/td>";
+			else
+				val += "<td>" + g  + "<\/td>";
+		}
+		val += "<\/tr>";
+		$(".start").after(val);
+	}
+	
+	function countHelp(var index){
+		var hasFour = 0;
+		for(i = 1; i < 6; i++){
+			var value = document.getElementById(".t").row[index].[i];
+			if(value == 3)
+			{
+				countBad++;
+				return;
+			}
+			
+			if(value == 4)
+				hasFour = 1;
+		}
+		
+		if(hasFour)
+			countGood++;
+		else
+			countBest++;
+	}
+	
+	function count(){
+		var rowCount = document.getElementById(".t").rows.length;
+		for(i = 0; i < rowCount;i++){
+			countHelp(i);
+		}
+	}
+	
+	
+</script>
+<head>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+	<title>lab3</title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+
+<input type="button" value="count" onClick="count()"><br>
+best<input class = "best" type="text" value=""><br>
+good<input class = "good" type="text" value=""><br>
+bad<input class = "bad" type="text" value=""><br>
+
+<input type="button" value="add" onClick="addNew()">
+<br>name
+<input class = "name" type="text" value="">
+<br>
+1<input class = "g0" type="text" value="">
+2<input class = "g1" type="text" value="">
+3<input class = "g2" type="text" value="">
+4<input class = "g3" type="text" value="">
+5<input class = "g4" type="text" value="">
+
+<table class = "t" width="50%" border="1">
+	<tr class= "start"><td colspan = "6">students</td></tr>
+</table>
+
+</body>
+</body>
+</html>
